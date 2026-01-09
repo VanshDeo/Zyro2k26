@@ -1,4 +1,5 @@
 import { Zap, Droplet, Recycle, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 const tracks = [
     {
@@ -20,7 +21,14 @@ const tracks = [
 
 export default function Tracks() {
     return (
-        <section id="tracks" className="py-20 bg-background relative">
+        <motion.div
+            id="tracks"
+            className="py-20 bg-background relative"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+        >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -48,13 +56,16 @@ export default function Tracks() {
                                 {track.description}
                             </p>
 
-                            <button className="flex items-center text-primary text-sm font-semibold group-hover:translate-x-1 transition-transform">
+                            <motion.button
+                                className="flex items-center text-primary text-sm font-semibold group-hover:translate-x-1 transition-transform"
+                                whileHover={{ x: 5 }}
+                            >
                                 Learn more <ArrowRight size={16} className="ml-2" />
-                            </button>
+                            </motion.button>
                         </div>
                     ))}
                 </div>
             </div>
-        </section>
+        </motion.div>
     );
 }

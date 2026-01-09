@@ -1,6 +1,15 @@
+import { motion } from "framer-motion";
+
 export default function Rewards() {
     return (
-        <section id="rewards" className="py-20 bg-surface/30">
+        <motion.div
+            id="rewards"
+            className="py-20 bg-surface/30"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+        >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 className="text-4xl md:text-5xl font-bold mb-16">
                     Win Big <span className="text-primary">Rewards</span>
@@ -34,9 +43,13 @@ export default function Rewards() {
                             <li>Full Cloud suite</li>
                             <li>Premium Swag</li>
                         </ul>
-                        <button className="w-full bg-primary text-black font-bold py-3 rounded hover:bg-accent transition-colors">
+                        <motion.button
+                            className="w-full bg-primary text-black font-bold py-3 rounded hover:bg-accent transition-colors"
+                            whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255, 215, 0, 0.5)" }}
+                            whileTap={{ scale: 0.95 }}
+                        >
                             View Details
-                        </button>
+                        </motion.button>
                     </div>
 
                     {/* Bronze - 3rd Place */}
@@ -53,6 +66,6 @@ export default function Rewards() {
                     </div>
                 </div>
             </div>
-        </section>
+        </motion.div>
     );
 }

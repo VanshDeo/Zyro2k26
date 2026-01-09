@@ -18,7 +18,13 @@ export default function Hero() {
     }, []);
 
     return (
-        <section id="home" className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+        <motion.div
+            id="home"
+            className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+        >
             {/* Background Gradient */}
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary/5 to-background z-0" />
 
@@ -41,12 +47,20 @@ export default function Hero() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-                        <button className="w-full sm:w-auto bg-primary text-black font-bold py-4 px-8 rounded-none hover:bg-accent transition-all transform hover:scale-105">
+                        <motion.button
+                            className="w-full sm:w-auto bg-primary text-black font-bold py-4 px-8 rounded-none hover:bg-accent transition-all transform hover:scale-105"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
                             Register Now
-                        </button>
-                        <button className="w-full sm:w-auto bg-transparent border border-white/20 text-white font-bold py-4 px-8 rounded-none hover:bg-white/5 transition-all">
+                        </motion.button>
+                        <motion.button
+                            className="w-full sm:w-auto bg-transparent border border-white/20 text-white font-bold py-4 px-8 rounded-none hover:bg-white/5 transition-all"
+                            whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+                            whileTap={{ scale: 0.95 }}
+                        >
                             Download Brochure
-                        </button>
+                        </motion.button>
                     </div>
 
                     <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto bg-surface/50 backdrop-blur-md p-6 rounded-xl border border-white/10">
@@ -67,6 +81,6 @@ export default function Hero() {
                     </div>
                 </motion.div>
             </div>
-        </section>
+        </motion.div>
     );
 }

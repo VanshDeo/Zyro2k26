@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 export default function Timeline() {
     const events = [
         { date: "August 15, 2026", title: "Registration Opens", description: "Sign up and form your teams." },
@@ -7,7 +9,14 @@ export default function Timeline() {
     ];
 
     return (
-        <section id="timeline" className="py-20 bg-background relative overflow-hidden">
+        <motion.div
+            id="timeline"
+            className="py-20 bg-background relative overflow-hidden"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+        >
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
                     Event <span className="text-primary">Timeline</span>
@@ -19,7 +28,14 @@ export default function Timeline() {
 
                     <div className="space-y-12">
                         {events.map((event, index) => (
-                            <div key={index} className={`relative flex flex-col md:flex-row gap-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                            <motion.div
+                                key={index}
+                                className={`relative flex flex-col md:flex-row gap-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
+                                initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.6, delay: index * 0.2 }}
+                                viewport={{ once: true }}
+                            >
 
                                 {/* Dot */}
                                 <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background transform -translate-x-1.5 md:-translate-x-2 mt-1.5 md:mt-0 z-10 box-content" />
@@ -39,11 +55,11 @@ export default function Timeline() {
 
                                 {/* Empty Spacer for balance */}
                                 <div className="hidden md:block md:w-1/2" />
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
             </div>
-        </section>
+        </motion.div>
     );
 }
