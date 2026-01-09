@@ -4,9 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
+import RegisterForm from "./RegisterForm";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   // for smooth scrolling
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -66,6 +68,7 @@ export default function Navbar() {
               className="bg-primary text-black font-bold py-2 px-6 rounded-none hover:bg-accent transition-all duration-300 transform hover:scale-105"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => setIsFormOpen(true)}
             >
               REGISTER NOW
             </motion.button>
@@ -109,6 +112,7 @@ export default function Navbar() {
                 className="w-full bg-primary text-black font-bold py-3 rounded-none hover:bg-accent"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => setIsFormOpen(true)}
               >
                 REGISTER NOW
               </motion.button>
@@ -116,6 +120,7 @@ export default function Navbar() {
           </div>
         </div>
       )}
+      <RegisterForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
     </motion.nav>
   );
 }

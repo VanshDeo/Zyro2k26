@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import RegisterForm from "./RegisterForm";
 
 export default function Hero() {
     const [timeLeft, setTimeLeft] = useState({ days: 14, hours: 6, minutes: 30 });
+    const [isFormOpen, setIsFormOpen] = useState(false);
 
     // Dummy timer logic for display
     useEffect(() => {
@@ -51,6 +53,7 @@ export default function Hero() {
                             className="w-full sm:w-auto bg-primary text-black font-bold py-4 px-8 rounded-none hover:bg-accent transition-all transform hover:scale-105"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
+                            onClick={() => setIsFormOpen(true)}
                         >
                             Register Now
                         </motion.button>
@@ -81,6 +84,27 @@ export default function Hero() {
                     </div>
                 </motion.div>
             </div>
+            {isFormOpen && (
+        <motion.div
+          className="fixed inset-0 flex items-center justify-center z-50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <div className="absolute inset-0 bg-black opacity-50" onClick={() => setIsFormOpen(false)} />
+          <div className="relative bg-white rounded-lg shadow-lg p-8 max-w-lg mx-auto">
+            <button
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+              onClick={() => setIsFormOpen(false)}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <RegisterForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
+          </div>
+        </motion.div>
+      )}
         </motion.div>
     );
 }
